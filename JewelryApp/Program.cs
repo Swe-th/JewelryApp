@@ -41,7 +41,7 @@ namespace JewelryApp
                         Console.Write("Type of account :");
                         var accountType = Convert.ToInt32(Console.ReadLine());
                         var account = Jewelry.CreateUser(emailAddress, userName, (TypeOfAccount)(accountType - 1));
-                        Console.WriteLine($"AN:{account.UserId},Name:{account.UserName},EmailId:{account.UserEmailId},TA:{account.AccountType}");
+                        Console.WriteLine($"UserId:{account.UserId},Name:{account.UserName},EmailId:{account.UserEmailId},TA:{account.AccountType}");
                         break;
                     case "2":
                         PrintAllAccounts();
@@ -56,7 +56,7 @@ namespace JewelryApp
                         Console.Write("Quantity:");
                         var quantity = Convert.ToInt32(Console.ReadLine());
                         var orders = Jewelry.AddProducts(productName, quantity);
-                        Console.WriteLine($"OrderId:{orders.OrderId},PN:{orders.ProductName},Qty:{orders.Quantity},UC:{orders.UnitCost}");
+                        Console.WriteLine($"OrderId:{orders.OrderId},PN:{orders.ProductId},Qty:{orders.Quantity},UC:{orders.UnitCost}");
                         break;
                     case "5":
                         break;
@@ -70,7 +70,9 @@ namespace JewelryApp
 
         private static void PrintAllAccounts()
         {
-            var useraccounts = Jewelry.GetAllUserAccounts();
+            Console.Write("Email Id:");
+            var emailid = Console.ReadLine();
+            var useraccounts = Jewelry.GetAllUserAccounts(emailid);
             foreach (var useracct in useraccounts)
             {
                 Console.WriteLine($"UserID:{useracct.UserId},UserName:{useracct.UserName},EmailId:{useracct.UserEmailId},TA:{useracct.AccountType}");

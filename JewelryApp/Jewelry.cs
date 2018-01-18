@@ -9,7 +9,8 @@ namespace JewelryApp
     
     static class Jewelry
     {
-        private static List<UserAccount> useraccounts = new List<UserAccount>();
+        private static JewelryModel db = new JewelryModel();
+        
         private static List<OrderDetails> orderdetails = new List<OrderDetails>();
 
         public static UserAccount CreateUser(string userEmailId, string userName="Default Account", TypeOfAccount accountType=TypeOfAccount.user)
@@ -21,17 +22,18 @@ namespace JewelryApp
                 AccountType = accountType
 
             };
-            useraccounts.Add(useraccount);
+            db.UserAccounts.Add(useraccount);
+            db.SaveChanges();
             return useraccount;
         }
 
         #region Methods
-        public static OrderDetails AddProducts(string productname,int quantity)
+        public static OrderDetails AddProducts(string productid,int quantity)
         {
             var orderdetail = new OrderDetails
             {
 
-                ProductName=productname,
+                ProductId=productid,
                 Quantity = quantity,
                 
             };
@@ -40,9 +42,9 @@ namespace JewelryApp
 
         }
 
-        public static List<UserAccount> GetAllUserAccounts()
+        public static List<UserAccount> GetAllUserAccounts(string emailId)
         {
-            return useraccounts;
+            return db.UserAccounts.Where(a => a.UserEmailId == emailId).ToList();
         }
 
         public static List<OrderDetails> GetAllOrderDetails()

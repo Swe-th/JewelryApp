@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace JewelryApp
 {
-    enum TypeOfAccount
+    public enum TypeOfAccount
     {
         user,
         guest
     }
-    class UserAccount
+    public class UserAccount
     {
-        #region static
-        private static int lastUserId = 0;
-        #endregion
+        
 
         #region Properties
+        [Key]
         public int UserId { get; private set; }
         public string UserName { get; set; }
+        [StringLength(50,ErrorMessage ="Email Id should be of length 50 characters.")]
         public string UserEmailId { get; set; }
         public string Password { get; set; }
         public string LoginStatus { get; set; }
@@ -29,7 +30,7 @@ namespace JewelryApp
         #region Constructor
         public UserAccount()
         {
-            UserId = ++lastUserId;
+            
         }
         #endregion
 

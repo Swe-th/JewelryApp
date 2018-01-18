@@ -14,7 +14,7 @@ namespace JewelryApp
 
         #region Properties
         public int OrderId { get; private set; }
-        public string ProductName { get; set; }
+        public string ProductId{ get; set; }
         public int Quantity { get; set; }
         public decimal UnitCost { get; private set; }
         
